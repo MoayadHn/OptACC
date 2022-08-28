@@ -12,6 +12,7 @@ from .testresult import TestResult
 
 from .methods.nelder_mead import tune as tune_nelder_mead
 from .methods.coord_search import tune_coord_search
+from .methods.RSM import tune_RSM
 from .methods.grid_search import (tune_grid_pow2, tune_grid_32,
         tune_grid_64, tune_grid_128, tune_grid_256,
         tune_grid_32_vlpow2)
@@ -19,6 +20,7 @@ from .methods.grid_search import (tune_grid_pow2, tune_grid_32,
 METHODS = {
     'nelder-mead': tune_nelder_mead,
     'coord-search': tune_coord_search,
+    'RSM': tune_RSM,
     'grid-pow2': tune_grid_pow2,
     'grid32': tune_grid_32,
     'grid64': tune_grid_64,
