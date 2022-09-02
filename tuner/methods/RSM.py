@@ -2,6 +2,7 @@ import math
 import numpy as np
 from ..searchresult import SearchResult
 from ..testresult import TestResult
+from ..point import Point
 
 DEFAULT_INITIAL_POINT = Point(256, 128)
 
@@ -19,7 +20,8 @@ def _RSM_search(objective, points):
     pt0 =Point(64,256)
     pt1 = Point(128,128)
     pt2 = Point(256,64)
-    Y = [objective(pt0), objective(pt1), objective(pt2)]
+    initialPoints= [Point(64,256),Point(128,128),Point(256,64)] 
+    Y = [objective(p) for p in initialPoints]
     
     times = {}
     iterations = 0
@@ -27,12 +29,12 @@ def _RSM_search(objective, points):
         iterations += 1
         result = objective(pt)
         Y.append(result)
-    coeffecents = model_RSM(x1, x2, Y)
-         c0, c1, c2 = map(float, coeffecents)
-        x,y = map(int,points[100])
-    for pt in points:
-         x1, x2 = map(int, pt)
-         preY = c0 + c1 * x1 + c2 * x2
+        coeffecents = model_RSM(x1, x2, Y)
+        c0, c1, c2 = map(float, coeffecents)
+        #x,y = map(int,points[100])
+        #for pt in points:
+        x1, x2 = map(int, pt)
+        preY = c0 + c1 * x1 + c2 * x2
     best = sorted(times, keys=lambda x: times[x])[0]
     return SearchResult(best, times, iterations)
 
